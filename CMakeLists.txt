@@ -9,7 +9,10 @@ add_executable(boof src/main.cpp)
 
 include_directories(vendor/argparse)
 include_directories(vendor/fmt/include)
+include_directories(vendor/luacpp)
+include_directories(/usr/include/lua5.4)
 
 add_subdirectory(vendor/fmt)
+add_subdirectory(vendor/luacpp)
 
-target_link_libraries(boof fmt::fmt)
+target_link_libraries(boof fmt luacpp)
