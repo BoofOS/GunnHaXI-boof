@@ -5,12 +5,13 @@
 int main(int argc, char** argv) {
 	argparse::ArgumentParser parser("boof");
 
-	argparse::ArgumentParser install("install");
-	argparse::ArgumentParser search("search");
-	search.add_argument("queries").nargs(argparse::nargs_pattern::at_least_one);
+	argparse::ArgumentParser update_command("upgrade");
+	argparse::ArgumentParser install_command("install");
+	argparse::ArgumentParser search_command("search");
+	search_command.add_argument("queries").nargs(argparse::nargs_pattern::at_least_one);
 
-	parser.add_subparser(install);
-	parser.add_subparser(search);
+	parser.add_subparser(install_command);
+	parser.add_subparser(search_command);
 
 	try {
 		parser.parse_args(argc, argv);
