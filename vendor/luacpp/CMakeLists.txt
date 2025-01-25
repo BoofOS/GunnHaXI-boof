@@ -246,7 +246,7 @@ option(BUILD_DOC "Build documentation" OFF)
 
 # check if Doxygen is installed
 find_package(Doxygen)
-if (DOXYGEN_FOUND)
+if (0)
     # set input and output files
     set(DOXYGEN_IN ${PROJECT_SOURCE_DIR}/../docs/Doxyfile.in)
     set(DOXYGEN_OUT ${PROJECT_BINARY_DIR}/Doxyfile)
@@ -266,6 +266,6 @@ if (DOXYGEN_FOUND)
 	COMMAND mv doc_doxygen/latex/refman.pdf ${CMAKE_BINARY_DIR}/luacpp.pdf
 	DEPENDS doc_doxygen
     )
-else (DOXYGEN_FOUND)
+else (0)
   message("Doxygen need to be installed to generate the doxygen documentation")
-endif (DOXYGEN_FOUND)
+endif (0)
