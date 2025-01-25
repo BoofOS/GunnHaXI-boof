@@ -2,21 +2,22 @@
 #include <argparse.hpp>
 #include <fmt/core.h>
 
-int main() {
+int main(int argc, char** argv) {
 	argparse::ArgumentParser parser("boof");
 
 	argparse::ArgumentParser install("install");
 	argparse::ArgumentParser search("search");
+	search.add_argument("queries").nargs(argparse::nargs_pattern::at_least_one);
 
 	parser.add_subparser(install);
 	parser.add_subparser(search);
 
 	try {
-		program.parse_args(argc, argv);
+		parser.parse_args(argc, argv);
 	}
 	catch (const std::exception& err) {
 		std::cerr << err.what() << std::endl;
-		std::cerr << program;
+		std::cerr << parser;
 		return 1;
 	}
 	// fmt::print("fmt test Hello, World!\n");
