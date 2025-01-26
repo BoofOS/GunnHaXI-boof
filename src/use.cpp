@@ -29,8 +29,5 @@ void use (const std::string input) {
 			std::cout << "You have chosen " << candidate.at(0) << std::endl;
 			choice = "1";
 		}
-
-
-
-
+	}
 }
