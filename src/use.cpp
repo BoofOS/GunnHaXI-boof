@@ -4,6 +4,8 @@
 
 #include "use.h"
 
+#include <filesystem>
+
 std::optional<std::string>
 query_single_package(std::vector<std::string> packages) {
 	std::string choice;
@@ -39,4 +41,6 @@ void use(const std::string input) {
 	}
 
 	// do stuff ...
+	namespace fs = std::filesystem;
+	fs::create_symlink();
 }
