@@ -4,6 +4,7 @@
 #include "update.h"
 #include "fzf_search.h"
 #include "download.h"
+#include "constants.h"
 
 int main(int argc, char** argv) {
 	argparse::ArgumentParser parser("boof");
