@@ -3,6 +3,7 @@
 #include <fmt/core.h>
 #include "update.h"
 #include "fzf_search.h"
+#include "download.h"
 
 int main(int argc, char** argv) {
 	argparse::ArgumentParser parser("boof");
@@ -33,6 +34,6 @@ int main(int argc, char** argv) {
 		// std::cout << e.what() << '\n';
 	// }
 	fmt::print("hi {}", static_cast<int>(update()));
-	fmt::print(fzf_search("test"));
+	fmt::print(fzf_search("fzf-"));
 	return 0;
 }
