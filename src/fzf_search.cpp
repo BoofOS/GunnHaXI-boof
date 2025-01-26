@@ -25,7 +25,7 @@ std::vector<std::string> fzf_search(const std::string &input) {
 	std::string result = run_command("cat /usr/boof/Packages |/usr/bin/fzf --filter=\"" + input + "\"");
 	std::vector<std::string> result_vector;
 	std::string temp;
-	for (char i : result) {
+	for (char& i : result) {
 		if (i == '\n') {
 			result_vector.push_back(temp);
 			temp = "";
