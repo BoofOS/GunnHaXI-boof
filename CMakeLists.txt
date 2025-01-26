@@ -20,6 +20,7 @@ include_directories(vendor/argparse)
 include_directories(vendor/fmt/include)
 include_directories(vendor/luacpp)
 include_directories(/usr/include/lua5.4)
+include_directories(src)
 
 add_subdirectory(vendor/fmt)
 add_subdirectory(vendor/luacpp)

@@ -2,6 +2,7 @@
 #include <argparse.hpp>
 #include <fmt/core.h>
 #include "upgrade.h"
+#include "fzf_search.h"
 
 int main(int argc, char** argv) {
 	argparse::ArgumentParser parser("boof");
@@ -31,5 +32,6 @@ int main(int argc, char** argv) {
 		// std::cout << e.what() << '\n';
 	// }
 	fmt::print("hi {}", static_cast<int>(upgrade()));
+	fmt::print(fzf_search("test"));
 	return 0;
 }
