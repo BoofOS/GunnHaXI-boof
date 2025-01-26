@@ -10,11 +10,17 @@ execute_process(COMMAND which clang++ OUTPUT_VARIABLE CXX_COMPILER_PATH OUTPUT_S
 execute_process(COMMAND which clang OUTPUT_VARIABLE C_COMPILER_PATH OUTPUT_STRIP_TRAILING_WHITESPACE)
 set(CMAKE_CXX_COMPILER ${CXX_COMPILER_PATH} CACHE STRING "C++ compiler" FORCE)
 set(CMAKE_C_COMPILER ${C_COMPILER_PATH} CACHE STRING "C compiler" FORCE)
+# for debug builds
 set(CMAKE_C_FLAGS "-g -glldb -std=c17 -Wall -Wextra -Wpedantic -fuse-ld=lld -fPIC -fPIE")
 set(CMAKE_CXX_FLAGS "-g -glldb  -std=c++17 -Wall -Wextra -Wpedantic -fuse-ld=lld -fPIC -fPIE")
 set(CMAKE_EXE_LINKER_FLAGS "-fuse-ld=lld")
+# for release builds
+#set(CMAKE_C_FLAGS "-O3 -std=c17 -Wall -Wextra -Wpedantic -fuse-ld=lld -fPIC -fPIE")
+#set(CMAKE_CXX_FLAGS "-O3 -std=c++17 -Wall -Wextra -Wpedantic -fuse-ld=lld -fPIC -fPIE")
+#set(CMAKE_EXE_LINKER_FLAGS "-fuse-ld=lld")
 
-add_executable(boof src/main.cpp src/update.cpp src/fzf_search.cpp src/install.cpp src/download.cpp src/use.cpp)
+
+add_executable(boof src/main.cpp src/update.cpp src/fzf_search.cpp src/install.cpp src/download.cpp src/use.cpp src/meta.cpp)
 
 include_directories(vendor/argparse)
 include_directories(vendor/fmt/include)

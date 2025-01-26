@@ -534,6 +534,7 @@ void vprintf(buffer<Char>& buf, basic_string_view<Char> format,
   }
   write(out, basic_string_view<Char>(start, to_unsigned(it - start)));
 }
+void print(const char* str, const std::string& basic_string);
 }  // namespace detail
 
 using printf_context = basic_printf_context<char>;

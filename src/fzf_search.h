@@ -12,5 +12,5 @@
 #include"constants.h"
 
 std::string run_command(const std::string &cmd);
-std::vector<std::string, std::allocator<std::string>>
-fzf_search(const std::string &input);
+std::vector<std::string> fzf_search(const std::string &input);
+std::vector<std::string> strict_search(const std::string &input);

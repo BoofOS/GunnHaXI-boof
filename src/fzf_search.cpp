@@ -35,3 +35,17 @@ std::vector<std::string> fzf_search(const std::string &input) {
 	}
 	return result_vector;
 }
+std::vector<std::string> strict_search(const std::string &input) {
+	std::string result = run_command("cat "+ BOOF_PACKAGE_LIST+" | /usr/bin/grep -E ^"+input+"-[0-9].*$");
+	std::vector<std::string> result_vector = {};
+	std::string temp;
+	for (char& i : result) {
+		if (i == '\n') {
+			result_vector.push_back(temp);
+			temp = "";
+		} else {
+			temp += i;
+		}
+	}
+	return result_vector;
+}
