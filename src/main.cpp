@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
 	// } catch (std::runtime_error &e) {
 		// std::cout << e.what() << '\n';
 	// }
-	fmt::print("hi {}", static_cast<int>(update()));
-	fmt::print(fzf_search("fzf-"));
+	fmt::print("hi {} \n", static_cast<int>(update()));
+	fmt::print(fzf_search("fzf-").at(0));
 	return 0;
 }
