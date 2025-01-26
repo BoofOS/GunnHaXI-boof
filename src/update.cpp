@@ -15,7 +15,7 @@ int rename_package_lists();
 
 update_status update() {
 	download(BOOF_PACKAGE_URL, BOOF_PACKAGE_LIST + ".tmp.xz");
-	run_command("unxz " + BOOF_PACKAGE_LIST + ".tmp.xz > " + BOOF_PACKAGE_LIST + ".tmp");
+	run_command("unxz " + BOOF_PACKAGE_LIST + ".tmp.xz");
 	rename_package_lists();
 	std::rename((BOOF_PACKAGE_LIST + ".tmp").c_str(), BOOF_PACKAGE_LIST.c_str());
 	return update_status::UPDATE_SUCCESS;
