@@ -12,11 +12,10 @@
 #include <array>
 #include<vector>
 
-std::string fzf_search(const std::string &input) {
-	std::string fzf_command= "cat /usr/boof/Packages |/usr/bin/fzf --filter=\"" + input + "\"";
+std::string run_command(const std::string& cmd) {
 	std::string result;
-	std::array<char, 128> buffer = {};
-	std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(fzf_command.c_str(), "r"), pclose);
+	std::array<char, 127> buffer = {};
+	std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd.c_str(), "r"), pclose);
 
 	if (!pipe) {
 		throw std::runtime_error("popen() failed!");
@@ -26,4 +25,8 @@ std::string fzf_search(const std::string &input) {
 	}
 
 	return result;
+}
+
+std::string fzf_search(const std::string &input) {
+	std::string fzf_command= "cat /usr/boof/Packages |/usr/bin/fzf --filter=\"" + input + "\"";
 }
