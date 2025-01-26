@@ -32,5 +32,11 @@ query_single_package(std::vector<std::string> packages) {
 }
 
 void use(const std::string input) {
-	std::vector<std::string> candidate = fzf_search(input);
+	std::vector<std::string> packages = fzf_search(input);
+	auto pkg = query_single_package(packages);
+	if (!pkg) {
+		return;
+	}
+
+	// do stuff ...
 }
