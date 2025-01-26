@@ -6,6 +6,8 @@
 #include "download.h"
 #include "fmt/printf.h"
 
+#include <use.h>
+
 install_status download_package(const std::string &package) {
 	download(BOOF_PACKAGE_BASE_URL + "/"+ package+".pkg.tar.zst",
 			 BOOF_STORE_PATH + "/"+package+".pkg.tar.zst");
@@ -241,6 +243,7 @@ install_status install_packages(const std::vector<std::string>& package) {
 		}
 		run_command("tar -xf " + path.string() + ".pkg.tar.zst -C " + path.string());
 		std::remove((path.string() + ".pkg.tar.zst").c_str());
+		use_internal(pkg);
 		std::fstream pkginfo(path.string() + "/.PKGINFO");
 		std::fstream buildinfo(path.string() + "/.BUILDINFO");
 		std::string line;

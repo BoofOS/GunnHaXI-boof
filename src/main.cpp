@@ -1,12 +1,13 @@
 #include "constants.h"
 #include "download.h"
 #include "fzf_search.h"
+#include "install.h"
 #include "update.h"
 #include <LuaCpp.hpp>
 #include <argparse.hpp>
 #include <fmt/core.h>
-#include "install.h"
 
+#include <use.h>
 
 int main(int argc, char** argv) {
 	// argparse::ArgumentParser parser("boof");
@@ -51,7 +52,10 @@ int main(int argc, char** argv) {
 	// case 0b0100: install_packages(install_command.get<std::vector<std::string>>("packages")); break;
 	// case 0b1000: query(search_command.get<std::vector<std::string>>("queries")); break;
 	// }
+	update();
 	install_packages({"fastfetch-2.35.0-1-x86_64",});
+	// use_internal("fastfetch-2.35.0-1-x86_64");
+	unuse_internal("fastfetch-2.35.0-1-x86_64");
 	// std::vector<std::string> v1 = {"ab","ac"};
 	// std::vector<std::string> v2 = {"ab-1","ab-2","ad-1","ac-1"};
 	// std::vector<std::string> v3 = filter_by_prefix(v1, v2);
