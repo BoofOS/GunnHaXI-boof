@@ -4,24 +4,28 @@
 
 #include "install.h"
 
+#include <download.h>
+
 install_status download_package(const std::string &package) {
+	download(BOOF_PACKAGE_BASE_URL + package + ".pkg.tar.zst",
+			 BOOF_STORE_PATH + package + ".pkg.tar.zst");
 	return install_status::DOWNLOAD_SUCCESS;
 }
 
-
-install_status install_packages(const std::vector<std::string>& packages) {
-	for (const auto& package : packages) {
+install_status install_packages(const std::vector<std::string> &packages) {
+	for (const auto &package : packages) {
 		if (download_package(package) != install_status::DOWNLOAD_SUCCESS)
 			return install_status::DOWNLOAD_FAILED;
 	}
 
-	for (const auto& package : packages) {
-		//run_command()
+	for (const auto &package : packages) {
+		// run_command()
 		namespace fs = std::filesystem;
 		fs::path path(BOOF_STORE_PATH);
 		path += package;
 		fs::create_directory(path);
-		run_command("tar -xf" + path.string() + ".pkg.tar.zst -C " + path.string());
+		run_command("tar -xf" + path.string() + ".pkg.tar.zst -C " +
+					path.string());
 		std::remove((path.string() + ".pkg.tar.zst").c_str());
 	}
 }
