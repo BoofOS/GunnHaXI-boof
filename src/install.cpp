@@ -295,7 +295,8 @@ install_status install_packages(const std::vector<std::string>& package) {
 	// }
 	if (to_install_with_version.empty()) {
 		return install_status::INSTALL_SUCCESS;
+	}else{
+	return install_packages(to_install_with_version);
 	}
-	install_packages(to_install_with_version);
 }
 
