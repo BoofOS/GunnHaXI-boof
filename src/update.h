@@ -3,6 +3,12 @@
 //
 
 #pragma once
+#include <string>
+#include <sys/stat.h>
+#include "constants.h"
+#include "fzf_search.h"
+#include <cstdio>
+#include <download.h>
 
 enum class update_status;
 
