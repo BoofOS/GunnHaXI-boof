@@ -1,16 +1,19 @@
+#include "constants.h"
+#include "download.h"
+#include "fzf_search.h"
+#include "update.h"
 #include <LuaCpp.hpp>
 #include <argparse.hpp>
 #include <fmt/core.h>
-#include "update.h"
-#include "fzf_search.h"
-#include "download.h"
-#include "constants.h"
+
+#include <install.h>
 
 int main(int argc, char** argv) {
 	argparse::ArgumentParser parser("boof");
 
 	argparse::ArgumentParser update_command("update");
 	argparse::ArgumentParser install_command("install");
+	argparse::ArgumentParser use_command("use");
 	argparse::ArgumentParser search_command("search");
 	install_command.add_argument("packages").nargs(argparse::nargs_pattern::at_least_one);
 	search_command.add_argument("queries").nargs(argparse::nargs_pattern::at_least_one);
@@ -34,7 +37,19 @@ int main(int argc, char** argv) {
 	// } catch (std::runtime_error &e) {
 		// std::cout << e.what() << '\n';
 	// }
-	fmt::print("hi {} \n", static_cast<int>(update()));
-	fmt::print(fzf_search("fzf-").at(0));
+	// fmt::print("hi {} \n", static_cast<int>(update()));
+	// fmt::print(fzf_search("fzf-").at(0));
+
+	bool update_used = parser.is_subcommand_used(update_command);
+	bool use_used = parser.is_subcommand_used(use_command);
+	bool install_used = parser.is_subcommand_used(install_command);
+	bool search_used = parser.is_subcommand_used(search_command);
+
+	switch (update_used | use_used << 1 | install_used << 2 | search_used << 3) {
+	case 0b0001: update(); break;
+	case 0b0010: use(); break;
+	case 0b0100: install_packages(install_command.get<std::vector<std::string>>("packages")); break;
+	case 0b1000: query(search_command.get<std::vector<std::string>>("queries")); break;
+	}
 	return 0;
 }
