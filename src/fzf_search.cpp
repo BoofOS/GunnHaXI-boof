@@ -3,14 +3,7 @@
 //
 
 #include "fzf_search.h"
-#include <string>
-#include <iostream>
-#include <cstdio>
-#include <memory>
-#include <stdexcept>
-#include <string>
-#include <array>
-#include<vector>
+
 
 std::string run_command(const std::string &cmd) {
 	std::string result;
