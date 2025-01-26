@@ -26,5 +26,5 @@ include_directories(/usr/include/curl)
 add_subdirectory(vendor/fmt)
 add_subdirectory(vendor/luacpp)
 add_compile_options(-g -glldb -Wall -Wextra -Wpedantic -fuse-ld=lld -fPIC -fPIE)
-
-target_link_libraries(boof fmt luacpp)
+find_library(curl curl REQUIRED)
+target_link_libraries(boof fmt luacpp curl)
