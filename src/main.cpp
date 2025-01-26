@@ -1,15 +1,16 @@
 #include <LuaCpp.hpp>
 #include <argparse.hpp>
 #include <fmt/core.h>
-#include "upgrade.h"
+#include "update.h"
 #include "fzf_search.h"
 
 int main(int argc, char** argv) {
 	argparse::ArgumentParser parser("boof");
 
-	argparse::ArgumentParser update_command("upgrade");
+	argparse::ArgumentParser update_command("update");
 	argparse::ArgumentParser install_command("install");
 	argparse::ArgumentParser search_command("search");
+	install_command.add_argument("packages").nargs(argparse::nargs_pattern::at_least_one);
 	search_command.add_argument("queries").nargs(argparse::nargs_pattern::at_least_one);
 
 	parser.add_subparser(install_command);
@@ -31,7 +32,7 @@ int main(int argc, char** argv) {
 	// } catch (std::runtime_error &e) {
 		// std::cout << e.what() << '\n';
 	// }
-	fmt::print("hi {}", static_cast<int>(upgrade()));
+	fmt::print("hi {}", static_cast<int>(update()));
 	fmt::print(fzf_search("test"));
 	return 0;
 }
