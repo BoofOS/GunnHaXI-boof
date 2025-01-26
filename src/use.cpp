@@ -39,8 +39,37 @@ void use(const std::string input) {
 	if (!pkg) {
 		return;
 	}
+}
 
-	// do stuff ...
-	namespace fs = std::filesystem;
-	//fs::create_symlink();
+void use_internal(std::string pkg_name) {
+    namespace fs = std::filesystem;
+    fs::path pkg_path = fs::path(BOOF_STORE_PATH) / pkg_name;
+
+    for (const auto& entry : fs::recursive_directory_iterator(pkg_path)) {
+        if (entry.is_regular_file()) {
+            std::string filename = entry.path().filename().string();
+            if (filename != ".PKGINFO" && filename != ".BUILDINFO" && filename != ".MTREE") {
+                fs::path target_path = "/" / entry.path().lexically_relative(pkg_path);
+                fs::create_directories(target_path.parent_path());
+                fs::create_symlink(entry.path(), target_path);
+            }
+        }
+    }
+}
+
+void unuse_internal(std::string pkg_name) {
+    namespace fs = std::filesystem;
+    fs::path pkg_path = fs::path(BOOF_STORE_PATH) / pkg_name;
+
+    for (const auto& entry : fs::recursive_directory_iterator(pkg_path)) {
+        if (entry.is_regular_file()) {
+            std::string filename = entry.path().filename().string();
+            if (filename != ".PKGINFO" && filename != ".BUILDINFO" && filename != ".MTREE") {
+                fs::path target_path = "/" / entry.path().lexically_relative(pkg_path);
+                if (fs::exists(target_path) && fs::is_symlink(target_path)) {
+                    fs::remove(target_path);
+                }
+            }
+        }
+    }
 }
