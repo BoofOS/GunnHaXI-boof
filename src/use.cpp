@@ -4,30 +4,33 @@
 
 #include "use.h"
 
-void use (const std::string input) {
+std::optional<std::string>
+query_single_package(std::vector<std::string> packages) {
 	std::string choice;
-	std::vector<std::string> candidate = fzf_search(input);
-	if (candidate.empty()) {
+	if (packages.empty()) {
 		std::cout << "No package found" << std::endl;
-		return;
-	}
-	if (candidate.size() > 1) {
-		//display all the candidates and ask user to choose
+		return std::nullopt;
+	} else if (packages.size() == 1) {
+		choice = packages[0];
+	} else if (packages.size() > 1) {
+		// display all the packages and ask user to choose
 		std::cout << "Multiple packages found, please choose one" << std::endl;
-		for (int i = 0; i < candidate.size(); i++) {
-			std::cout << i+1 << ". " << candidate.at(i) << std::endl;
+		for (int i = 0; i < packages.size(); i++) {
+			std::cout << i + 1 << ". " << packages.at(i) << std::endl;
 		}
 
 		std::cin >> choice;
-		if (std::stoi(choice) > candidate.size() || std::stoi(choice) < 1) {
+		if (std::stoi(choice) > packages.size() || std::stoi(choice) < 1) {
 			std::cout << "Invalid choice" << std::endl;
-			return;
-		}else {
-			std::cout << "You have chosen " << candidate.at(std::stoi(choice)-1) << std::endl;
-		}
-		if (candidate.size() == 1) {
-			std::cout << "You have chosen " << candidate.at(0) << std::endl;
-			choice = "1";
+			return std::nullopt;
+		} else {
+			choice = packages.at(std::stoi(choice) - 1);
+			std::cout << "You have chosen " << choice << std::endl;
 		}
 	}
+	return choice;
+}
+
+void use(const std::string input) {
+	std::vector<std::string> candidate = fzf_search(input);
 }
