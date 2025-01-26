@@ -14,13 +14,14 @@ set(CMAKE_C_FLAGS "-g -glldb -std=c17 -Wall -Wextra -Wpedantic -fuse-ld=lld -fPI
 set(CMAKE_CXX_FLAGS "-g -glldb  -std=c++17 -Wall -Wextra -Wpedantic -fuse-ld=lld -fPIC -fPIE")
 set(CMAKE_EXE_LINKER_FLAGS "-fuse-ld=lld")
 
-add_executable(boof src/main.cpp src/update.cpp src/fzf_search.cpp src/install.cpp)
+add_executable(boof src/main.cpp src/update.cpp src/fzf_search.cpp src/install.cpp src/download.cpp)
 
 include_directories(vendor/argparse)
 include_directories(vendor/fmt/include)
 include_directories(vendor/luacpp)
 include_directories(/usr/include/lua5.4)
 include_directories(src)
+include_directories(/usr/include/curl)
 
 add_subdirectory(vendor/fmt)
 add_subdirectory(vendor/luacpp)

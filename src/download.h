@@ -3,3 +3,5 @@
 //
 
 #pragma once
+#include <string>
+int download(const std::string &url,const std::string &outfilename);
