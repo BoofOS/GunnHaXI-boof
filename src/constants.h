@@ -7,8 +7,10 @@
 
 #if (0)
 const std::string BOOF_BASE_PATH = "/usr/boof";
+const std::string BOOF_SYMLINK_PATH = "/usr/local/bin";
 #else
 const std::string BOOF_BASE_PATH = "/home/linux/boof";
+const std::string BOOF_SYMLINK_PATH = "/home/linux/bin";
 #endif
 
 const std::string BOOF_STORE_PATH = BOOF_BASE_PATH + "/store";
