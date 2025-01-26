@@ -228,22 +228,29 @@ install_status install_packages(const std::vector<std::string>& package) {
 		unvar_deps = {};
 		vared_deps = {};
 		build_vared_deps = {};
-		fmt::printf("current package: %s\n", pkg);
+		auto fzf_s = fzf_search(pkg);
+		std::string package;
+		if (fzf_s.size() > 1) {
+			auto p = query_single_package(fzf_s);
+			if (!p) return install_status::INSTALL_FAILED;
+			package = p.value();
+		} else package = pkg;
+		fmt::printf("current package: %s\n", package);
 		fmt::printf("--------------------------------\n");
 		namespace fs = std::filesystem;
 		fs::path path(BOOF_STORE_PATH);
 		path += "/";
-		path += pkg;
+		path += package;
 		fs::create_directory(path);
 		// download the package
-		if (download_package(pkg) != install_status::DOWNLOAD_SUCCESS) {
+		if (download_package(package) != install_status::DOWNLOAD_SUCCESS) {
 			return install_status::DOWNLOAD_FAILED;
 		}else {
-			log_download(pkg);
+			log_download(package);
 		}
 		run_command("tar -xf " + path.string() + ".pkg.tar.zst -C " + path.string());
 		std::remove((path.string() + ".pkg.tar.zst").c_str());
-		use_internal(pkg);
+		use_internal(package);
 		std::fstream pkginfo(path.string() + "/.PKGINFO");
 		std::fstream buildinfo(path.string() + "/.BUILDINFO");
 		std::string line;
