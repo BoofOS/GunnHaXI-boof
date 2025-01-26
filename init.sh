@@ -1,4 +1,3 @@
-su -
 cd /usr
 mkdir boof
 cd boof

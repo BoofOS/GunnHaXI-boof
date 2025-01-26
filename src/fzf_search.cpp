@@ -22,7 +22,7 @@ std::string run_command(const std::string &cmd) {
 }
 
 std::vector<std::string> fzf_search(const std::string &input) {
-	std::string result = run_command("cat /usr/boof/Packages |/usr/bin/fzf --filter=\"" + input + "\"");
+	std::string result = run_command("cat "+ BOOF_PACKAGE_LIST+" | /usr/bin/fzf --filter=\"" + input + "\"");
 	std::vector<std::string> result_vector;
 	std::string temp;
 	for (char& i : result) {
