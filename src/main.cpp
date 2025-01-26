@@ -1,6 +1,7 @@
 #include <LuaCpp.hpp>
 #include <argparse.hpp>
 #include <fmt/core.h>
+#include "upgrade.h"
 
 int main(int argc, char** argv) {
 	argparse::ArgumentParser parser("boof");
@@ -29,5 +30,6 @@ int main(int argc, char** argv) {
 	// } catch (std::runtime_error &e) {
 		// std::cout << e.what() << '\n';
 	// }
+	fmt::print("hi {}", static_cast<int>(upgrade()));
 	return 0;
 }

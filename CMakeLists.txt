@@ -14,7 +14,7 @@ set(CMAKE_C_FLAGS "-g -glldb -std=c17 -Wall -Wextra -Wpedantic -fuse-ld=lld -fPI
 set(CMAKE_CXX_FLAGS "-g -glldb  -std=c++17 -Wall -Wextra -Wpedantic -fuse-ld=lld -fPIC -fPIE")
 set(CMAKE_EXE_LINKER_FLAGS "-fuse-ld=lld")
 
-add_executable(boof src/main.cpp)
+add_executable(boof src/main.cpp src/upgrade.cpp)
 
 include_directories(vendor/argparse)
 include_directories(vendor/fmt/include)
