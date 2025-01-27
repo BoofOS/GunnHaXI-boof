@@ -16,7 +16,7 @@ enum class install_status;
 
 int install_package(const std::string& package);
 install_status download_package(const std::string& package);
-install_status install_packages(const std::vector<std::string>& package);
+install_status install_packages(const std::vector<std::string>& package, bool strict = false);
 std::vector<std::string> filter_by_prefix(const std::vector<std::string>& prefixes, const std::vector<std::string>& names);
 std::vector<std::string> filter_by_prefix_reverse(const std::vector<std::string>& prefixes, const std::vector<std::string>& names);
 enum class install_status {

@@ -5,7 +5,7 @@
 #pragma once
 #include <string>
 
-#if (0)
+#if (1)
 const std::string BOOF_BASE_PATH = "/usr/boof";
 const std::string BOOF_SYMLINK_PATH = "/usr/local/bin";
 #else

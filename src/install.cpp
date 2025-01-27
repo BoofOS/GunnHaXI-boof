@@ -199,7 +199,7 @@ std::vector<std::string> filter_by_prefix_reverse(const std::vector<std::string>
 // 	return install_status::INSTALL_SUCCESS;
 // }
 
-install_status install_packages(const std::vector<std::string>& package) {
+install_status install_packages(const std::vector<std::string>& package, bool strict) {
 	/* 1. packages will be a vector of string that looklike pkgname-ver
 	 * inside the loop
 	 * 2. download the package
@@ -230,7 +230,7 @@ install_status install_packages(const std::vector<std::string>& package) {
 		build_vared_deps = {};
 		auto fzf_s = fzf_search(pkg);
 		std::string package;
-		if (fzf_s.size() > 1) {
+		if (fzf_s.size() > 1 && !strict) {
 			auto p = query_single_package(fzf_s);
 			if (!p) return install_status::INSTALL_FAILED;
 			package = p.value();
@@ -306,7 +306,7 @@ install_status install_packages(const std::vector<std::string>& package) {
 	if (to_install_with_version.empty()) {
 		return install_status::INSTALL_SUCCESS;
 	}else{
-	return install_packages(to_install_with_version);
+	return install_packages(to_install_with_version, true);
 	}
 }
 
